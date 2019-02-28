@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Palette Generator</title>
+    <link rel="stylesheet" href="normalize.css" type="text/css" />
+    <link rel="stylesheet" href="main.css" type="text/css" />
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.3.1.js"
+    ></script>
+    <script>
+      $(function() {
+        const selectors = $(".selectors > .selector");
+        const swatches = $(".swatches");
+
+        const colorPicker = $(".color-picker");
+        const colorPickerCursor = $(".color-picker-cursor");
+
+        draggable(colorPickerCursor);
+
+        colorPicker.click(mouseEvent => {
+          colorPickerCursor.offset({
+            top: mouseEvent.pageY,
+            left: mouseEvent.pageX
+          });
+        });
+
+        selectors.click(function() {
+          console.log(this);
+        });
+      });
+
+      /* Function that takes in a jquery object and allows dragging */
+      function draggable(jquery) {
+        let initialX = 0;
+        let initialY = 0;
+
+        let finalX = 0;
+        let finalY = 0;
+
+        jquery.mousedown(function(mouseDownEvent) {
+          mouseDownEvent.preventDefault();
+
+          initialX = mouseDownEvent.clientX;
+          initialY = mouseDownEvent.clientY;
+
+          $(document)
+            .mousemove(function(mouseMoveEvent) {
+              mouseMoveEvent.preventDefault();
+
+              finalX = initialX - mouseMoveEvent.clientX;
+              finalY = initialY - mouseMoveEvent.clientY;
+
+              initialX = mouseMoveEvent.clientX;
+              initialY = mouseMoveEvent.clientY;
+
+              jquery.css({
+                top: `${jquery[0].offsetTop - finalY}px`,
+                left: `${jquery[0].offsetLeft - finalX}px`
+              });
+            })
+            .mouseup(function() {
+              /* Once the mouse is up, that means that the dragging has ended
+                  It should stop listening to those events and then recursively
+                  call the draggable function again to listen for the next mousedown */
+
+              jquery.off("mousedown");
+
+              $(document)
+                .off("mousemove")
+                .off("mouseup");
+
+              draggable(jquery);
+            });
+        });
+
+        return jquery;
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <h1>Choose your colors!</h1>
+      <div class="selectors">
+        <div class="selector"></div>
+      </div>
+
+      <div class="swatches"></div>
+
+      <div class="color-modal-wrapper">
+        <!-- Actual color -->
+        <div class="color-picker">
+          <!-- Saturation is how intense the color is -->
+          <div class="color-picker-saturation">
+            <!-- Value is how dark/bright the color is -->
+            <div class="color-picker-value"></div>
+          </div>
+
+          <!-- The actual picker itself -->
+          <div class="color-picker-cursor"></div>
+        </div>
+
+        <div class="hue-slider-wrapper">
+          <div class="hue-slider-vertical">
+            <div class="hue-slider-bar"></div>
+          </div>
+
+          <div class="hue-slider-horozontal">
+            <div class="hue-slider-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

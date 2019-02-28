@@ -1,0 +1,142 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #464646;
+}
+
+.selectors {
+  min-width: 256px;
+  display: inherit;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: inherit;
+}
+
+.swatches {
+  /*background: lightgray;*/
+}
+
+button {
+  background: transparent;
+  color: white;
+  border-width: 5px;
+  border-radius: 25px;
+  padding: 10px;
+  border: 3px solid white;
+}
+
+input {
+  margin: 25px;
+}
+
+.selector,
+.swatch {
+  width: 64px;
+  height: 64px;
+}
+
+.color-modal-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-picker,
+.color-picker-saturation,
+.color-picker-value {
+  width: 30vw;
+  height: 30vw;
+  min-width: 256px;
+  min-height: 256px;
+}
+
+.color-picker-saturation,
+.color-picker-value {
+  position: absolute;
+}
+
+.color-picker {
+  background: rgba(0, 255, 255);
+}
+
+.color-picker-saturation {
+  background: linear-gradient(to right, white, transparent);
+}
+
+.color-picker-value {
+  background: linear-gradient(to top, black, transparent);
+}
+
+.color-picker-cursor {
+  width: 5px;
+  height: 5px;
+  border: 2px solid green;
+  background: transparent;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 9999;
+}
+
+.hue-slider-wrapper {
+  width: 24px;
+  height: 30vw;
+  min-height: 256px;
+  margin-left: 25px;
+  background: linear-gradient(
+    to bottom,
+    #ff0000 0%,
+    #ffff00 17%,
+    #00ff00 33%,
+    #00ffff 50%,
+    #0000ff 66%,
+    #ff00ff 83%,
+    #ff0000 100%
+  );
+}
+
+.hue-slider-vertical {
+  display: block;
+}
+
+.hue-slider-horozontal {
+  display: none;
+}
+
+@media screen and (max-width: 320px) {
+  .color-modal-wrapper {
+    /* Dont use flex-wrap */
+    flex-direction: column;
+  }
+
+  .hue-slider-wrapper {
+    width: 256px;
+    height: 24px;
+    min-height: unset;
+    margin-left: 0;
+    margin-top: 25px;
+    background: linear-gradient(
+      to left,
+      #ff0000 0%,
+      #ffff00 17%,
+      #00ff00 33%,
+      #00ffff 50%,
+      #0000ff 66%,
+      #ff00ff 83%,
+      #ff0000 100%
+    );
+  }
+
+  .hue-slider-vertical {
+    display: none;
+  }
+
+  .hue-slider-horozontal {
+    display: block;
+  }
+}
