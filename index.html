@@ -6,113 +6,76 @@
     <title>Palette Generator</title>
     <link rel="stylesheet" href="normalize.css" type="text/css" />
     <link rel="stylesheet" href="main.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="spectrum.css" />
     <script
       type="text/javascript"
       src="https://code.jquery.com/jquery-3.3.1.js"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
     <script>
       $(function() {
-        const selectors = $(".selectors > .selector");
         const swatches = $(".swatches");
+        const MAX_PICKERS = 25;
+        const SPACING = 100;
 
-        const colorPicker = $(".color-picker");
-        const colorPickerCursor = $(".color-picker-cursor");
+        let currentTotalPickers = 5;
 
-        draggable(colorPickerCursor);
+        addRows(currentTotalPickers);
 
-        colorPicker.click(mouseEvent => {
-          colorPickerCursor.offset({
-            top: mouseEvent.pageY,
-            left: mouseEvent.pageX
-          });
-        });
+        for (let i = 0; i < currentTotalPickers; i++) {
+          addPicker(i);
+        }
 
-        selectors.click(function() {
-          console.log(this);
-        });
-      });
+        function addPicker(rowNumber, initialColor) {
+          const thisPicker = $("<input class='color-picker'/>");
+          const row = $(".swatches-row-" + (rowNumber + 1));
+          if (!row) return;
 
-      /* Function that takes in a jquery object and allows dragging */
-      function draggable(jquery) {
-        let initialX = 0;
-        let initialY = 0;
-
-        let finalX = 0;
-        let finalY = 0;
-
-        jquery.mousedown(function(mouseDownEvent) {
-          mouseDownEvent.preventDefault();
-
-          initialX = mouseDownEvent.clientX;
-          initialY = mouseDownEvent.clientY;
-
-          $(document)
-            .mousemove(function(mouseMoveEvent) {
-              mouseMoveEvent.preventDefault();
-
-              finalX = initialX - mouseMoveEvent.clientX;
-              finalY = initialY - mouseMoveEvent.clientY;
-
-              initialX = mouseMoveEvent.clientX;
-              initialY = mouseMoveEvent.clientY;
-
-              jquery.css({
-                top: `${jquery[0].offsetTop - finalY}px`,
-                left: `${jquery[0].offsetLeft - finalX}px`
-              });
+          thisPicker
+            .appendTo(row)
+            .spectrum({
+              color: initialColor || "#5089DB"
             })
-            .mouseup(function() {
-              /* Once the mouse is up, that means that the dragging has ended
-                  It should stop listening to those events and then recursively
-                  call the draggable function again to listen for the next mousedown */
-
-              jquery.off("mousedown");
-
-              $(document)
-                .off("mousemove")
-                .off("mouseup");
-
-              draggable(jquery);
+            .on("dragstop.spectrum", function(event, color) {
+              addSwatch(row, color.toHexString());
             });
-        });
 
-        return jquery;
-      }
+          return thisPicker;
+        }
+
+        function addSwatch(row, hex) {
+          console.log(row);
+          return $("<div class='swatch'/>")
+            .css("background", hex)
+            .appendTo(row);
+        }
+
+        function addRows(amount = 1, childrens = []) {
+          const rows = [];
+
+          for (let i = 0; i < amount; i++) {
+            const currentTotal = $(".swatches").children().length;
+
+            if (currentTotal >= MAX_PICKERS) return null;
+
+            const rowNumber = currentTotal + 1;
+            const row = $("<div class='swatches-row-" + rowNumber + "'/>");
+
+            childrens.forEach(children => children.appendTo(row));
+            row
+              .css("width", "calc(" + SPACING + "% / " + currentTotalPickers + ")")
+              .appendTo(swatches);
+
+            rows.push(row);
+          }
+
+          return rows;
+        }
+      });
     </script>
   </head>
 
   <body>
-    <div class="wrapper">
-      <h1>Choose your colors!</h1>
-      <div class="selectors">
-        <div class="selector"></div>
-      </div>
-
-      <div class="swatches"></div>
-
-      <div class="color-modal-wrapper">
-        <!-- Actual color -->
-        <div class="color-picker">
-          <!-- Saturation is how intense the color is -->
-          <div class="color-picker-saturation">
-            <!-- Value is how dark/bright the color is -->
-            <div class="color-picker-value"></div>
-          </div>
-
-          <!-- The actual picker itself -->
-          <div class="color-picker-cursor"></div>
-        </div>
-
-        <div class="hue-slider-wrapper">
-          <div class="hue-slider-vertical">
-            <div class="hue-slider-bar"></div>
-          </div>
-
-          <div class="hue-slider-horozontal">
-            <div class="hue-slider-bar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="swatches"></div>
   </body>
 </html>
