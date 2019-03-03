@@ -19,11 +19,14 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
+    "autoprefixer": "^9.4.9",
+    "cssnano": "^4.1.10",
     "grunt": "^1.0.3",
     "grunt-babel": "^8.0.0",
-    "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-uglify": "^4.0.0",
-    "grunt-processhtml": "^0.4.2"
+    "grunt-postcss": "^0.9.0",
+    "grunt-processhtml": "^0.4.2",
+    "precss": "^4.0.0"
   },
   "dependencies": {
     "core-js": "^2.6.5"

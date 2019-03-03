@@ -25,11 +25,27 @@ module.exports = function(grunt) {
         dest: "dist/main.min.js"
       }
     },
-    cssmin: {
-      target: {
-        files: {
-          "dist/main.min.css": ["src/assets/css/*.css"]
-        }
+    postcss: {
+      options: {
+        map: false,
+        processors: [
+          require("precss")(),
+          require("autoprefixer")({ browsers: "last 2 versions" }),
+          require("cssnano")({
+            preset: [
+              "default",
+              {
+                discardComments: {
+                  removeAll: true
+                }
+              }
+            ]
+          })
+        ]
+      },
+      dist: {
+        src: "src/assets/css/main.css",
+        dest: "dist/main.min.css"
       }
     },
     processhtml: {
@@ -43,8 +59,8 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-contrib-uglify");
-  grunt.loadNpmTasks("grunt-contrib-cssmin");
+  grunt.loadNpmTasks("grunt-postcss");
   grunt.loadNpmTasks("grunt-processhtml");
 
-  grunt.registerTask("default", ["babel", "uglify", "cssmin", "processhtml"]);
+  grunt.registerTask("default", ["babel", "uglify", "postcss", "processhtml"]);
 };
