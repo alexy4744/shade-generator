@@ -121,11 +121,8 @@ function recalculateRowWidth() {
   );
 }
 
-/* Since browserify will enclose all of the functions in the file in an annonymous one on build,
-  inputs and buttons have to be listened thru javascript so that it is in the same scope and
-  functions can be invoked. */
 function listenInputs() {
-  for (const input of document.getElementsByTagName("input")) {
+  $(document.getElementsByTagName("input")).each((_, input) => {
     input.oninput = function() {
       if (this.type === "range") {
         $("input[name = " + input.className + "-number]").val(this.value);
@@ -135,7 +132,7 @@ function listenInputs() {
 
       renderSwatches();
     };
-  }
+  });
 }
 
 function listenButtons() {

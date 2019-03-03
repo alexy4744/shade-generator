@@ -21,7 +21,6 @@
     "@babel/preset-env": "^7.3.4",
     "grunt": "^1.0.3",
     "grunt-babel": "^8.0.0",
-    "grunt-browserify": "^5.3.0",
     "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-uglify": "^4.0.0",
     "grunt-processhtml": "^0.4.2"
