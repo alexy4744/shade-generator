@@ -1,0 +1,102 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-width: 768px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #34383c;
+}
+
+hr {
+  width: 32px;
+  height: 2px;
+  margin: 15px 0 25px 3px;
+  background: #2b2f33;
+  border: none;
+}
+
+span {
+  display: block;
+  color: white;
+  text-align: center;
+  margin: 15px 0;
+}
+
+button {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background-color: #2b2f33;
+  outline: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #23272b;
+  cursor: pointer;
+}
+
+label {
+  color: #d1d5d9;
+}
+
+input {
+  margin: 5px 0;
+}
+
+input[type="number"] {
+  width: 48px;
+  background: #292d31;
+  color: #d1d5d9;
+  padding: 5px;
+  text-align: center;
+  border-radius: 3px;
+  border: none;
+}
+
+.swatches {
+  width: 90%;
+  padding: 25px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.swatches-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.sp-replacer,
+.swatch {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 5px 0;
+}
+
+.swatch {
+  box-shadow: 2px 2px 7px 0;
+}
+
+.swatch:hover {
+  cursor: pointer;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 25px;
+}
