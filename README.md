@@ -1,6 +1,7 @@
 # Shade Generator
 
 Easily generate shades of multiple colors at the same time.
+Built files found in gh-pages branch.
 
  ## To build
 
