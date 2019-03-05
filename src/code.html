@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Code</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      padding-top: 50px;
+    }
+
+    .navbar-fixed-top {
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--
+The section below puts tabs at the top of the page.
+As long as your files are index.html and style.css,
+you don't need to change anything below.
+
+If you have any other files, make sure you follow the structure below.
+-->
+
+  <div class="container-fluid">
+    <ul class="nav nav-tabs navbar-fixed-top">
+      <li class="active"><a href="#index">index.html</a></li>
+      <li><a href="#style">main.css</a></li>
+      <li><a href="#javascript">main.js</a></li>
+    </ul>
+
+    <!-- 
+URL structure:
+https://gist-it.appspot.com/github/OWNERSUSERNAME/REPONAME/raw/master/FILEPATH?footer=0
+
+DIRECTIONS:
+1. Copy the URL above
+2. Paste it both places where you see URL below, i.e. script src="URL"
+3. Replace the CAPITALIZED info with your info.
+
+EXAMPLE: 
+https://gist-it.appspot.com/github/bmuellerhstat/website-portfolio-example/raw/master/index.html?footer=0
+-->
+    <div class="tab-content">
+      <div id="index" class="tab-pane fade in active">
+        <script type="text/javascript" src="https://gist-it.appspot.com/github/alexy4744/shade-generator/raw/master/src/index.html?footer=0"></script>
+      </div>
+      <div id="style" class="tab-pane fade">
+        <script type="text/javascript" src="https://gist-it.appspot.com/github/alexy4744/shade-generator/raw/master/src/assets/css/main.css?footer=0"></script>
+      </div>
+      <div id="javascript" class="tab-pane fade">
+        <script type="text/javascript" src="https://gist-it.appspot.com/github/alexy4744/shade-generator/raw/master/src/assets/js/main.js?footer=0"></script>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $(".nav-tabs a").click(function() {
+        $(this).tab('show');
+      });
+      $('.nav-tabs a').on('shown.bs.tab', function(event) {
+        var x = $(event.target).text(); // active tab
+        var y = $(event.relatedTarget).text(); // previous tab
+        $(".act span").text(x);
+        $(".prev span").text(y);
+      });
+
+      // custom code font-size (feel free to change this)
+      $('pre').css('font-size', '16px');
+    });
+  </script>
+
+</body>
+
+</html>
